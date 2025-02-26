@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard do Condutor</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Dashboard do Condutor</h1>
+        </header>
+        
+        <div class="dashboard-summary">
+            <div class="summary-box">Inspeções Pendentes: <strong>2</strong></div>
+            <div class="summary-box">Inspeções Concluídas: <strong>8</strong></div>
+            <div class="summary-box">Última Inspeção: <strong>12/02/2025</strong></div>
+        </div>
+        
+        <button class="schedule-inspection">Agendar Nova Inspeção</button>
+        
+        <div class="inspections-list">
+            <h2>Histórico de Inspeções</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Placa</th>
+                        <th>Status</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10/02/2025</td>
+                        <td>ABC-1234</td>
+                        <td>Concluído</td>
+                        <td><button>Ver Relatório</button></td>
+                    </tr>
+                    <tr>
+                        <td>05/02/2025</td>
+                        <td>XYZ-5678</td>
+                        <td>Pendente</td>
+                        <td><button>Detalhes</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
