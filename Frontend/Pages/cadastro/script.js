@@ -41,6 +41,9 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        // Criptografar senha antes de enviá-la ao backend
+        const encryptedPassword = await encryptPassword(senha);
+
         // Exibir indicador de carregamento
         showLoading(true);
 
@@ -49,13 +52,13 @@ document.addEventListener("DOMContentLoaded", function () {
             const csrfToken = getCsrfToken();
 
             // Enviar os dados ao backend
-            const response = await fetch(getApiUrl("/register"), {
+            const response = await fetch(getApiUrl("/auth/register"), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "X-CSRF-Token": csrfToken
                 },
-                body: JSON.stringify({ nome, email, telefone, senha })
+                body: JSON.stringify({ nome, email, telefone, senha: encryptedPassword })
             });
 
             const data = await response.json();
@@ -80,50 +83,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /**
- * Valida um e-mail com regex.
+ * Função para criptografar a senha antes de enviá-la ao backend.
  */
-function validarEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-/**
- * Valida um telefone (somente números, com 10 ou 11 dígitos).
- */
-function validarTelefone(telefone) {
-    const telefoneRegex = /^\d{10,11}$/;
-    return telefoneRegex.test(telefone);
-}
-
-/**
- * Obtém o token CSRF armazenado nos cookies.
- */
-function getCsrfToken() {
-    return document.cookie.replace(/(?:(?:^|.*;\s*)csrf_token\s*=\s*([^;]*).*$)|^.*$/, "$1");
-}
-
-/**
- * Retorna a URL base da API, ajustável por ambiente.
- */
-function getApiUrl(endpoint) {
-    const BASE_URL = "http://vistotrack.com:5000";
-    return `${BASE_URL}${endpoint}`;
-}
-
-/**
- * Exibe um alerta dinâmico para feedback do usuário.
- */
-function showAlert(message, type = "info") {
-    alert(message); // Pode ser substituído por um modal ou toast futuramente
-}
-
-/**
- * Exibe ou esconde um indicador de carregamento.
- */
-function showLoading(isLoading) {
-    const button = document.querySelector("#registration-form button[type='submit']");
-    if (button) {
-        button.disabled = isLoading;
-        button.innerText = isLoading ? "Cadastrando..." : "Cadastrar";
-    }
+async function encryptPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    return btoa(String.fromCharCode(...new Uint8Array(hashBuffer))); // Converte para Base64
 }
