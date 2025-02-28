@@ -6,16 +6,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Redirecionamento para login
     loginButton.addEventListener("click", function () {
-        window.location.href = "login.html";
+        window.location.href = "/login/";
     });
 
     // Redirecionamento para cadastro
     registerButton.addEventListener("click", function () {
-        window.location.href = "cadastro.html";
+        window.location.href = "/cadastro/";
     });
 
     // Redirecionamento para acesso ao sistema
     accessButton.addEventListener("click", function () {
-        window.location.href = "dashboard.html";
+        window.location.href = "/login/";
     });
 });
