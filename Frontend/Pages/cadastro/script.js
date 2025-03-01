@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Redireciona para a tela de login
             showAlert("Cadastro realizado com sucesso!", "success");
             setTimeout(() => {
-                window.location.href = "../Login/login.html";
+                window.location.href = "../Login/";
             }, 2000);
 
         } catch (error) {

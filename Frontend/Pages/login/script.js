@@ -81,7 +81,7 @@ function getCsrfToken() {
  * Retorna a URL base da API, ajustável por ambiente.
  */
 function getApiUrl(endpoint) {
-    const BASE_URL = "http://127.0.0.1:5000"; // Definir variável global para facilitar mudanças
+    const BASE_URL = "http://vistotrack.com:8000"; // Definir variável global para facilitar mudanças
     return `${BASE_URL}${endpoint}`;
 }
 
